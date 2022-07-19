@@ -3,13 +3,22 @@ package com.educandoweb.workshop.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+
+
+@Entity
+@Table(name = "table_user")
 public class User implements Serializable{
 
-	
 	private static final long serialVersionUID = 1L;
 	
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
     private String name;
     private String email;
@@ -20,7 +29,6 @@ public class User implements Serializable{
     }
 
 	public User(Integer id, String name, String email, String phone, String password) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
