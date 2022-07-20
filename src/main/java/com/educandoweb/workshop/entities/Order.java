@@ -12,32 +12,33 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-@Table(name = "tb_orders")
+import com.educandoweb.workshop.entities.enums.OrderStatus;
+
+@Table(name = "tb_order")
 @Entity
 public class Order implements Serializable{
 
 	
 	private static final long serialVersionUID = 1L;
 	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private Instant moment;
+	private Integer orderstatus;
 	
-	@JsonIgnore
-	@JoinColumn(name = "client_id")
+	@JoinColumn(name = "client")
 	@ManyToOne
 	private User client;
 	
 	public Order() {
 	}
 
-	public Order(Integer id, Instant moment, User client) {
+	public Order(Integer id, Instant moment, User client,OrderStatus ordestatus) {
 		this.id = id;
 		this.moment = moment;
 		this.client = client;
+		setOrderstatus(ordestatus);
 	}
 
 	public Integer getId() {
@@ -63,6 +64,16 @@ public class Order implements Serializable{
 	public void setClient(User client) {
 		this.client = client;
 	}
+	
+	
+
+	public OrderStatus getOrderstatus() {
+		return OrderStatus.valueof(orderstatus);
+	}
+
+	public void setOrderstatus(OrderStatus orderstatus) {
+		this.orderstatus = orderstatus.getcode();
+	}
 
 	@Override
 	public int hashCode() {
@@ -82,6 +93,5 @@ public class Order implements Serializable{
 	}
 	
 	
-	
-	
+
 }
