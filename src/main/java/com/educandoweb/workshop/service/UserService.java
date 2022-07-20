@@ -12,7 +12,7 @@ import com.educandoweb.workshop.repository.UserRepository;
 @Service
 public class UserService {
 
-	@Autowired
+	@Autowired 
 	UserRepository repository;
 	
 	public List<User>findall() {

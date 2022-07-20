@@ -1,18 +1,20 @@
 package com.educandoweb.workshop.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
-
-@Entity
 @Table(name = "table_user")
+@Entity
 public class User implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -25,15 +27,22 @@ public class User implements Serializable{
     private String phone;
     private String password;
     
+    @OneToMany(mappedBy = "client")
+    private List<Order>order = new ArrayList<>();
+    
+  
+    
     public User() {
     }
 
-	public User(Integer id, String name, String email, String phone, String password) {
+	public User(Integer id, String name, String email, String phone, String password,List<Order>order) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
 		this.password = password;
+		this.order = order;
+	
 	}
 
 	public Integer getId() {
@@ -76,11 +85,21 @@ public class User implements Serializable{
 		this.password = password;
 	}
 
+	
+	
+	
+	
+
+	public List<Order> getOrder() {
+		return order;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
+	
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

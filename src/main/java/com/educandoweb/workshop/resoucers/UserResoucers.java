@@ -21,15 +21,14 @@ public class UserResoucers {
 	
 	@GetMapping
 	ResponseEntity<List<User>>findall() {
-		List<User> user = service.findall();
-		return ResponseEntity.ok().body(user);
-		}
+		List<User>list = service.findall();
+		return ResponseEntity.ok().body(list);
+	}
 	
 	@GetMapping(value = "/{id}")
-	ResponseEntity<User>findbyid (@PathVariable Integer id) {
+	public ResponseEntity<User>findbyid(@PathVariable Integer id){
 		User user = service.findbyid(id);
 		return ResponseEntity.ok().body(user);
-		
 	}
 	
 	
