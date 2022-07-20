@@ -1,5 +1,6 @@
 package com.educandoweb.workshop.entities;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
@@ -10,15 +11,22 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "tb_orders")
 @Entity
-public class Order {
+public class Order implements Serializable{
 
+	
+	private static final long serialVersionUID = 1L;
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private Instant moment;
 	
+	@JsonIgnore
 	@JoinColumn(name = "client_id")
 	@ManyToOne
 	private User client;

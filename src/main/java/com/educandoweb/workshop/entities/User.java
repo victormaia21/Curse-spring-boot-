@@ -27,6 +27,7 @@ public class User implements Serializable{
     private String phone;
     private String password;
     
+   
     @OneToMany(mappedBy = "client")
     private List<Order>order = new ArrayList<>();
     
@@ -35,14 +36,12 @@ public class User implements Serializable{
     public User() {
     }
 
-	public User(Integer id, String name, String email, String phone, String password,List<Order>order) {
+	public User(Integer id, String name, String email, String phone, String password) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
 		this.password = password;
-		this.order = order;
-	
 	}
 
 	public Integer getId() {
