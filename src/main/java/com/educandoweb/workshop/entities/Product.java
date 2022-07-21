@@ -12,34 +12,34 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-@Table(name = "tb_category")
+@Table(name = "tb_product")
 @Entity
-public class Category implements Serializable{
+public class Product implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
+	private String description;
+	private double price;
+	private String imgurl;
 	
 	@Transient
-	private Set<Product>product = new HashSet<>();
+	private Set<Category>category = new HashSet<>();
 	
-	
-	public Category() {
+	public Product() {
 	}
 
-	public Category(Integer id, String name) {
+	public Product(Integer id, String name, String description, double price, String imgurl) {
 		super();
 		this.id = id;
 		this.name = name;
-	}
-
-	
-	
-	public Set<Product> getProduct() {
-		return product;
+		this.description = description;
+		this.price = price;
+		this.imgurl = imgurl;
 	}
 
 	public Integer getId() {
@@ -58,6 +58,36 @@ public class Category implements Serializable{
 		this.name = name;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public String getImgurl() {
+		return imgurl;
+	}
+
+	public void setImgurl(String imgurl) {
+		this.imgurl = imgurl;
+	}
+	
+	
+
+	public Set<Category> getCategory() {
+		return category;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -71,7 +101,7 @@ public class Category implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Category other = (Category) obj;
+		Product other = (Product) obj;
 		return Objects.equals(id, other.id);
 	}
 	
