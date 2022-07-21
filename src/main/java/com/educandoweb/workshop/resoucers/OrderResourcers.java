@@ -24,7 +24,7 @@ public class OrderResourcers {
 		return list;
 	}
 	
-	@GetMapping(value = "{id}")
+	@GetMapping(value = "/{id}")
 	public Order findbyid(@PathVariable Integer id) {
 		Order order = service.findbyid(id);
 		return order;
