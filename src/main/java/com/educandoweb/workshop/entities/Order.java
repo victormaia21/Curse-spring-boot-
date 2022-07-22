@@ -2,6 +2,8 @@ package com.educandoweb.workshop.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.educandoweb.workshop.entities.enums.OrderStatus;
@@ -27,13 +30,17 @@ public class Order implements Serializable{
 	private Instant moment;
 	private Integer orderstatus;
 	
-	@JoinColumn(name = "client")
+	@JoinColumn(name = "client_id")
 	@ManyToOne
 	private User client;
 	
+	@OneToMany(mappedBy = "id.order")
+	private List<OrderIntem>orderintem = new ArrayList<>();
+	
+	
 	public Order() {
 	}
-
+	
 	public Order(Integer id, Instant moment, User client,OrderStatus ordestatus) {
 		this.id = id;
 		this.moment = moment;
@@ -66,6 +73,10 @@ public class Order implements Serializable{
 	}
 	
 	
+
+	public List<OrderIntem> getOrderintem() {
+		return orderintem;
+	}
 
 	public OrderStatus getOrderstatus() {
 		return OrderStatus.valueof(orderstatus);

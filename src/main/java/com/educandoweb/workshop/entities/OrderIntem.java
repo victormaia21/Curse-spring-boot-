@@ -7,45 +7,48 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.educandoweb.workshop.entities.pk.OrderIntemPK;
+import com.educandoweb.workshop.entities.pk.OrderIntemPk;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "")
+@Table(name = "order_intem")
 public class OrderIntem implements Serializable{
-
-	
 	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
-	private OrderIntemPK id;
+	private OrderIntemPk id = new OrderIntemPk();
 	private Integer quantity;
 	private double price;
 	
 	public OrderIntem() {
 	}
 
-	public OrderIntem(Product product, Order order, Integer quantity, double price) {
-		id.setProduct(product);
+	public OrderIntem(Order order,Product product,Integer quantity, double price) {
+		super();
 		id.setOrder(order);
+		id.setProduct(product);
 		this.quantity = quantity;
 		this.price = price;
 	}
-
-	public Product GetProduct() {
+	
+	public Product getProduct() {
 		return id.getProduct();
 	}
 	
-	public void SetProduct(Product product) {
+	public void setProduct(Product product) {
 		id.setProduct(product);
 	}
 	
-	public Order GetOrder() {
+	@JsonIgnore
+	public Order getOrder() {
 		return id.getOrder();
 	}
 	
-	public void SetOrder(Order order) {
-		this.SetOrder(order);
+	public void setOrder(Order order) {
+		id.setOrder(order);
 	}
+	
+	
 
 	public Integer getQuantity() {
 		return quantity;
@@ -81,4 +84,5 @@ public class OrderIntem implements Serializable{
 	}
 	
 	
+
 }

@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.educandoweb.workshop.entities.Category;
 import com.educandoweb.workshop.entities.Order;
+import com.educandoweb.workshop.entities.OrderIntem;
 import com.educandoweb.workshop.entities.Product;
 import com.educandoweb.workshop.entities.User;
 import com.educandoweb.workshop.entities.enums.OrderStatus;
 import com.educandoweb.workshop.repository.CategoryRepository;
+import com.educandoweb.workshop.repository.OrderIntemRepository;
 import com.educandoweb.workshop.repository.OrderRepository;
 import com.educandoweb.workshop.repository.ProductRepository;
 import com.educandoweb.workshop.repository.UserRepository;
@@ -23,16 +25,19 @@ import com.educandoweb.workshop.repository.UserRepository;
 public class TestConfig implements CommandLineRunner{
 
 	@Autowired
-	UserRepository userrep;
+	private UserRepository userrep;
 	
 	@Autowired
-	OrderRepository ordrep;
+	private OrderRepository ordrep;
 	
 	@Autowired
-	CategoryRepository catrep;
+	private CategoryRepository catrep;
 	
 	@Autowired
-	ProductRepository prorep;
+	private ProductRepository prorep;
+	
+	@Autowired
+	private OrderIntemRepository oir;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -68,6 +73,13 @@ public class TestConfig implements CommandLineRunner{
 		Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), u2,OrderStatus.CANCELED);
 		Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u1,OrderStatus.WAITING_PAYMENT);
 		ordrep.saveAll(Arrays.asList(o1,o2,o3));
+		
+		OrderIntem oi1 = new OrderIntem( o1,p1, 2, p1.getPrice());
+		OrderIntem oi2 = new OrderIntem( o1,p3, 1, p3.getPrice());
+		OrderIntem oi3 = new OrderIntem( o2,p3, 2, p3.getPrice());
+		OrderIntem oi4 = new OrderIntem(o3,p5, 2, p5.getPrice());
+		
+		oir.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 		
 		
 		
