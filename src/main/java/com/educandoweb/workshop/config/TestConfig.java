@@ -74,9 +74,9 @@ public class TestConfig implements CommandLineRunner{
 		Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u1,OrderStatus.WAITING_PAYMENT);
 		ordrep.saveAll(Arrays.asList(o1,o2,o3));
 		
-		OrderIntem oi1 = new OrderIntem( o1,p1, 2, p1.getPrice());
-		OrderIntem oi2 = new OrderIntem( o1,p3, 1, p3.getPrice());
-		OrderIntem oi3 = new OrderIntem( o2,p3, 2, p3.getPrice());
+		OrderIntem oi1 = new OrderIntem(o1,p1, 2, p1.getPrice());
+		OrderIntem oi2 = new OrderIntem(o1,p3, 1, p3.getPrice());
+		OrderIntem oi3 = new OrderIntem(o2,p3, 2, p3.getPrice());
 		OrderIntem oi4 = new OrderIntem(o3,p5, 2, p5.getPrice());
 		
 		oir.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
