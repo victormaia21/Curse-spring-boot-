@@ -48,8 +48,6 @@ public class OrderIntem implements Serializable{
 		id.setOrder(order);
 	}
 	
-	
-
 	public Integer getQuantity() {
 		return quantity;
 	}
