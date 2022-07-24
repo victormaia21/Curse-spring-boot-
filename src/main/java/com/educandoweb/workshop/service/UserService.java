@@ -30,7 +30,22 @@ public class UserService {
 		return obj;
 	}
 	
-	public void userdelete(Integer id) {
+	public void delete(Integer id) {
 		repository.deleteById(id);
 	}
+	
+	public User update(Integer id,User obj) {
+		Optional<User> entity = repository.findById(id);
+		updateData(entity,obj);
+		return repository.save(entity.get());
+	}
+
+	private void updateData(Optional<User> entity, User obj) {
+		entity.get().setEmail(obj.getEmail());
+		entity.get().setName(obj.getName());
+		entity.get().setPhone(obj.getPhone());
+		
+	}
+
+	
 }
