@@ -39,9 +39,9 @@ public class Order implements Serializable{
 	@OneToMany(mappedBy = "id.order")
 	private List<OrderIntem>orderintem = new ArrayList<>();
 	
+	
 	@OneToOne(mappedBy = "order",cascade = CascadeType.ALL)
 	private Payment payment;
-	
 	
 	public Order() {
 	}
@@ -97,7 +97,13 @@ public class Order implements Serializable{
 		this.orderstatus = orderstatus.getcode();
 	}
 	
-	
+    public double getTotal() {
+    	Double sum = 0.0;
+    	for(OrderIntem x : orderintem) {
+    		sum = sum + x.getSubTotal();
+    	}
+    	return sum;
+    }
 
 	@Override
 	public int hashCode() {
