@@ -1,6 +1,6 @@
 package com.educandoweb.workshop.service.exception;
 
-public class ResourcesNotFoundException extends RuntimeException{
+public class ResourcesNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 	
