@@ -1,10 +1,10 @@
 package com.educandoweb.workshop.service.exception;
 
-public class DatabaseException extends RuntimeException{
+public class DataBaseException extends RuntimeException{
 
 	private static final long serialVersionUID = 1L;
 	
-	public DatabaseException(String msg) {
+	public DataBaseException(String msg) {
 		super(msg);
 	}
 
