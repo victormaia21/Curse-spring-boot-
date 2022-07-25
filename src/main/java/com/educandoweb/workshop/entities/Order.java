@@ -32,6 +32,7 @@ public class Order implements Serializable{
 	private Instant moment;
 	private Integer orderstatus;
 	
+	
 	@JoinColumn(name = "client_id")
 	@ManyToOne
 	private User client;

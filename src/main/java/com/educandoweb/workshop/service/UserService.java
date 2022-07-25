@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.educandoweb.workshop.entities.User;
 import com.educandoweb.workshop.repository.UserRepository;
+import com.educandoweb.workshop.service.exception.ResourcesNotFoundException;
 
 @Service
 public class UserService {
@@ -22,25 +23,25 @@ public class UserService {
 	
 	public User findbyid(Integer id) {
 		Optional<User>user = repository.findById(id);
-		return user.get();
+		return user.orElseThrow(() -> new ResourcesNotFoundException(id));
 	}
 	
-	public User insert(User obj) {
-		obj = repository.save(obj);
-		return obj;
+	public User insert(User user) {
+		user = repository.save(user);
+		return user;
 	}
 	
 	public void delete(Integer id) {
 		repository.deleteById(id);
 	}
 	
-	public User update(Integer id,User obj) {
-		Optional<User> entity = repository.findById(id);
-		updateData(entity,obj);
-		return repository.save(entity.get());
+	public User update(Integer id, User obj) {
+		Optional<User>entity = repository.findById(id);
+		updatedata(entity,obj);
+		return entity.get();
 	}
 
-	private void updateData(Optional<User> entity, User obj) {
+	private void updatedata(Optional<User> entity, User obj) {
 		entity.get().setEmail(obj.getEmail());
 		entity.get().setName(obj.getName());
 		entity.get().setPhone(obj.getPhone());
